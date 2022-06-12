@@ -1,0 +1,9 @@
+body{
+    direction: ltr;
+    font-family: main-font;
+}
+@font-face {
+    font-family: main-font ;
+    src: url(fonts/Shabnam.woff);
+    src: url(fonts/Shabnam.woff2);
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>پروژه</title>
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <!--main style-->
+    <link rel="stylesheet" href="./style.css"/>
+    <!--font awesome cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!--angular-route -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+  </head>
+  <body dir="ltr" ng-app="num" ng-controller="numberc">
+    <!--main wraqpper--> 
+    <div class="container py-2">
+
+     <!--nav-->
+      <!-- <ul class="nav nav-pills nav-fill d-flex flex-row-reverse">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">صفحه اصلی</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"> کاربران</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">تماس با ما</a>
+        </li>
+      </ul> -->
+    <!--End nav-->
+
+
+<button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" style="float:right ;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <span><i class="fa fa-add"></i></span></button>
+
+<!--modal for add user-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-end">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">کاربر جدید</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       
+<!--form control-->
+        <form class="row g-3 flex-row-reverse text-end">
+          <div class="col-md-12">
+            <label for="validationServer01" class="form-label">نام</label>
+            <input type="text" class="form-control is-valid text-end" id="validationServer01" ng-model="firstName" required>
+            <div class="valid-feedback">
+             !مناسب
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="validationServer02" class="form-label">نام خانوادگی</label>
+            <input type="text" class="form-control is-valid text-end" id="validationServer02" ng-model="lname"  required>
+            <div class="valid-feedback">
+              !مناسب
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="validationServerUsername" class="form-label">ایمیل</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-envelope"></i></span>
+               <input type="email" ng-model="email" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+              ایمیل خود را وارد کنید
+              </div>
+            </div>
+          </div>
+        
+        
+          <div class="col-md-6">
+            <select class="form-select text-end is-valid" aria-label="Default select example" ng-model="jens" required>
+              <option selected>جنسیت</option>
+              <option value="1">خانم</option>
+              <option value="2">آقا</option>
+             
+            </select>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <span class="input-group-text">$</span>
+              <input type="number" class="form-control is-valid" ng-model="salary"  aria-label="Amount (to the nearest dollar)" ng-model="add" required>
+              <span class="input-group-text"></span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!-- <label for="validationServer01" class="form-label"></label> -->
+            <input type="number" class="form-control is-valid" id="validationServer01" ng-model="min" value="" placeholder="حداقل تراکنش:2" required>
+            <div class="valid-feedback">
+             
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!-- <label for="validationServer01" class="form-label"></label> -->
+            <input type="number" class="form-control is-valid" id="validationServer01" ng-model="max" value="" placeholder="حداکثر تراکنش:10" required>
+            <div class="valid-feedback">
+             
+            </div>
+          </div>
+        
+          <div class="col-12 text-center">
+            <button class="btn btn-outline-primary w-100" type="submit" ng-click="addItem()">اضافه کن</button>
+          </div>
+        </form> 
+<!--End form control-->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن فرم</button>
+        <button type="button" class="btn btn-primary">به جدول اضافه کن</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End modal for add user-->
+
+
+<!--table list-of-users-->
+<table class="table table-hover table-responsive">
+  <thead>
+    <tr class="bg-light">
+      <th scope="col">#</th>
+      <th scope="col">نام</th>
+      <th scope="col">نام خانوادگی</th>
+      <th scope="col">ایمیل</th>
+      <th scope="col">جنسیت</th>
+      <th scope="col">درآمد ماهانه</th>
+      <th scope="col">حداقل تراکنش</th>
+      <th scope="col">حداکثر تراکنش</th>
+      <th scope="col">حذف</th>
+      <th scope="col"> ویرایش</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr ng-repeat="x in users">
+      <th scope="row">{{x.Id}}</th>
+      <td>{{x.firstName}}</td>
+      <td>{{x.lastName}}</td>
+      <td>{{x.email}}</td>
+      <td>{{x.jens}}</td>
+      <td>{{x.salary}}</td>
+      <td>{{x.minTransaction}}</td>
+      <td>{{x.maxTransaction}}</td>
+      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" ng-click="delete(users)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-trash"></i></span></button>
+      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" ng-click="edit(users)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-edit"></i></span></button>
+      </td>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!--End table list-of-users-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <!--End main wraqpper-->
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--main-script-->
+    <script src="./script.js"></script>
+    <!--angular-->
+    <!-- <script src="./node_modules/angular/angular.min.js"></script> -->
+    <!--angular-route -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script> -->
+    <!--bootstrap-->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+
+  </body>
+</html>
