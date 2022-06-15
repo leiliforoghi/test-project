@@ -15,7 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <!--angular-route -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-
+    
   </head>
   <body dir="ltr" ng-app="num" ng-controller="numberc">
     <!--main wraqpper--> 
@@ -37,6 +37,11 @@
 
 
 <button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" style="float:right ;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <span><i class="fa fa-add"></i></span></button>
+<!--for search on table-->
+<form class="d-flex">
+  <input class="form-control me-2 text-end" ng-model="search" type="search" placeholder="جست و جو" aria-label="Search">
+</form>
+<!--end for search on table-->
 
 <!--modal for add user-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -52,14 +57,14 @@
         <form class="row g-3 flex-row-reverse text-end">
           <div class="col-md-12">
             <label for="validationServer01" class="form-label">نام</label>
-            <input type="text" class="form-control is-valid text-end" id="validationServer01" ng-model="firstName" required>
+            <input type="text" class="form-control is-valid text-end" id="validationServer01"  ng-model="firstName" required>
             <div class="valid-feedback">
              !مناسب
             </div>
           </div>
           <div class="col-md-12">
             <label for="validationServer02" class="form-label">نام خانوادگی</label>
-            <input type="text" class="form-control is-valid text-end" id="validationServer02" ng-model="lname"  required>
+            <input type="text" class="form-control is-valid text-end" id="validationServer02" ng-model="lastName"  required>
             <div class="valid-feedback">
               !مناسب
             </div>
@@ -68,8 +73,8 @@
             <label for="validationServerUsername" class="form-label">ایمیل</label>
             <div class="input-group has-validation">
               <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-envelope"></i></span>
-               <input type="email" ng-model="email" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
-              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+               <input type="email" ng-model="email" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+              <div id="validationServerUsernameFeedback" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="info@gmail.com" class="invalid-feedback">
               ایمیل خود را وارد کنید
               </div>
             </div>
@@ -87,27 +92,27 @@
           <div class="col-md-6">
             <div class="input-group mb-3">
               <span class="input-group-text">$</span>
-              <input type="number" class="form-control is-valid" ng-model="salary"  aria-label="Amount (to the nearest dollar)" ng-model="add" required>
+              <input type="number" class="form-control is-valid" ng-model="salary"  aria-label="Amount (to the nearest dollar)"  required>
               <span class="input-group-text"></span>
             </div>
           </div>
           <div class="col-md-6">
             <!-- <label for="validationServer01" class="form-label"></label> -->
-            <input type="number" class="form-control is-valid" id="validationServer01" ng-model="min" value="" placeholder="حداقل تراکنش:2" required>
+            <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="minTransaction" value="" placeholder="حداقل تراکنش:2" required>
             <div class="valid-feedback">
              
             </div>
           </div>
           <div class="col-md-6">
             <!-- <label for="validationServer01" class="form-label"></label> -->
-            <input type="number" class="form-control is-valid" id="validationServer01" ng-model="max" value="" placeholder="حداکثر تراکنش:10" required>
+            <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="maxTransaction" value="" placeholder="حداکثر تراکنش:10" required>
             <div class="valid-feedback">
              
             </div>
           </div>
         
           <div class="col-12 text-center">
-            <button class="btn btn-outline-primary w-100" type="submit" ng-click="addItem()">اضافه کن</button>
+            <button class="btn btn-outline-primary w-100" type="submit" ng-click="addUsers()">اضافه کن</button>
           </div>
         </form> 
 <!--End form control-->
@@ -122,27 +127,51 @@
 </div>
 <!--End modal for add user-->
 
+    </div>
+    <!--End main wraqpper-->
 
-<!--table list-of-users-->
+      <div class="container">
+        <!--table list-of-users-->
 <table class="table table-hover table-responsive">
   <thead>
     <tr class="bg-light">
       <th scope="col">#</th>
-      <th scope="col">نام</th>
-      <th scope="col">نام خانوادگی</th>
-      <th scope="col">ایمیل</th>
-      <th scope="col">جنسیت</th>
-      <th scope="col">درآمد ماهانه</th>
-      <th scope="col">حداقل تراکنش</th>
-      <th scope="col">حداکثر تراکنش</th>
-      <th scope="col">حذف</th>
+      <th ng-click="sort('firstName')" scope="col">نام
+      <!-- <span class="fa fa-sort" ng-show="sortKey=='firstName'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></span> -->
+      <i class="fa-solid fa-sort" ng-show="sortKey=='firstName'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+    </th>
+      <th ng-click="sort('lastName')" scope="col">نام خانوادگی
+        <i class="fa-solid fa-sort" ng-show="sortKey=='lastName'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+      </th>
+   
+      <th ng-click="sort('email')" scope="col">ایمیل
+        <i class="fa-solid fa-sort" ng-show="sortKey=='email'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+      </th>
+     
+      <th ng-click="sort('jens')" scope="col">جنسیت
+        <i class="fa-solid fa-sort" ng-show="sortKey=='jens'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+      </th>
+  
+      <th ng-click="sort('salary')"scope="col">درآمد ماهانه
+        <i class="fa-solid fa-sort" ng-show="sortKey=='salary'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+      </th>
+      <th ng-click="sort('minTransaction')" scope="col">حداقل تراکنش
+        <i class="fa-solid fa-sort" ng-show="sortKey=='minTransaction'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+      </th>
+     
+      <th ng-click="sort('maxTransaction')" scope="col">حداکثر تراکنش
+        <i class="fa-solid fa-sort" ng-show="sortKey=='maxTransaction'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+
+      </th>
+    
       <th scope="col"> ویرایش</th>
+      <th scope="col">حذف</th>
 
     </tr>
   </thead>
   <tbody>
     
-    <tr ng-repeat="x in users">
+    <tr dir-paginate="x in users | itemsPerPage:2 |filter: search | orderBy:sortKey:reverse" ng-model="addMe" dir-paginate="value in data | itemsPerPage: 5">
       <th scope="row">{{x.Id}}</th>
       <td>{{x.firstName}}</td>
       <td>{{x.lastName}}</td>
@@ -151,42 +180,23 @@
       <td>{{x.salary}}</td>
       <td>{{x.minTransaction}}</td>
       <td>{{x.maxTransaction}}</td>
-      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" ng-click="delete(users)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-trash"></i></span></button>
-      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" ng-click="edit(users)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-edit"></i></span></button>
+      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center"  ng-click="editUsers(firstName)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-edit"></i></span></button>
+      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" ng-click="removeItem($index)" ng-click="delete()" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-trash"></i></span></button>
       </td>
       </td>
     </tr>
   </tbody>
 </table>
+<!--pagination-->
+<dir-pagination-controls class="paginate"
+max-size="2"
+direction-links="true"
+boundary-links="true">
+</dir-pagination-controls>
+<!--end pagination-->
 
 <!--End table list-of-users-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    <!--End main wraqpper-->
-
-      
-
+</div>
 
 
 
@@ -213,6 +223,9 @@
     <!--bootstrap-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <!--pagination-->
+    <script src="./pagination.js"></script>
+
 
   </body>
 </html>

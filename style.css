@@ -7,3 +7,40 @@ body{
     src: url(fonts/Shabnam.woff);
     src: url(fonts/Shabnam.woff2);
 }
+.table{
+    direction: rtl;
+    line-height: 60px;
+    background-color: transparent;
+    border-color: rgb(151, 189, 219);
+}
+ .paginate{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-decoration: none;
+    background-color: #92B4EC; */
+   
+   
+ }
+/* .paginate ul{
+    list-style-type: none;
+    text-decoration: none;
+    display: flex;  */
+    /* justify-content: space-around; */
+    /* align-items: stretch; */
+
+   
+ /* }
+.paginate ul li{
+    border-left: 1px solid grey;
+}
+.ng-binding{
+text-decoration: none;
+} */
+ .paginate a{
+    text-decoration: none;  
+    color: #fff !important; 
+    justify-content: space-between;
+   
+} 
