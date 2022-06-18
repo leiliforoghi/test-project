@@ -24,6 +24,10 @@ body{
    
    
  }
+ :placeholder-shown{
+     opacity: 0.5;
+ }
+
 /* .paginate ul{
     list-style-type: none;
     text-decoration: none;
@@ -46,5 +50,5 @@ text-decoration: none;
    
 } 
 .table th,td{
-  max-width: 100px !important;
+  /* max-width: 100px !important; */
 }
