@@ -36,19 +36,6 @@ num.controller("numberc", function ($scope) {
   ];
 
 
-  //remove row of table
-  $scope.removeItem = function (x) {
-    $scope.users.splice(x, 1);
-  };
-  //end remove row of table
-
-  //add row in table
-  // $scope.addItem = function (){
-  //     $scope.users.push($scope.addMe);
-  // $scope.users = [] .push();
-  // return ($scope.users);
-  // };
-  //end add row in table
 
   //add row in table
   $scope.addUsers = function () {
@@ -67,37 +54,45 @@ num.controller("numberc", function ($scope) {
   };
   //end add row in table
 
-//edit row table
-// $scope.editUsers = function (index) {
-//     $scope.isadd = false;
-//     $scope.addMe = $scope.users[index];
-//     $scope.isadd = true;
-//     $scope.users.splice(x, 1);
-
-    // };
 
   //for max input 
-
-   
  //end for max input 
 
 //sort columns
 $scope.sort = function(keyname){
     $scope.sortKey = keyname;
     $scope.reverse = !$scope.reverse;
+    // $scope.$index = !$scope.$index;
 }
 //end sort columns
 
 
-
-
 //edit row table
-    // $scope.editUsers= function() {
-    //   $scope.edit=false;
-    //   $scope.change = function(){
-    //       $scope.addMe= true;
-    //   }
-    //   }
+$scope.editUsers = function(x){
+
+  $scope.modify = true;
+  $scope.view = true;
+};
+$scope.update = function(x){
+
+  $scope.modify = false;
+  $scope.view = false;
+};
  //end edit row table
+
+ 
+  //remove row of table
+  $scope.removeItem = function(x) {
+
+  $scope.users.splice(x,1);
+    // $scope.user.splice($scope.user.indexOf($scope.users[index]), 1);
+  //  angular.forEach($scope.user, function(value,index){
+  //    if(x.firstName == value.firstName){
+  //      $scope.user.splice(index,1);
+  //    }
+  //  });
+  }
+  //end remove row of table
+  
 
 });

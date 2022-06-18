@@ -18,7 +18,7 @@
     
   </head>
   <body dir="ltr" ng-app="num" ng-controller="numberc">
-    <!--main wraqpper--> 
+   
     <div class="container py-2">
 
      <!--nav-->
@@ -36,7 +36,7 @@
     <!--End nav-->
 
 
-<button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" style="float:right ;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <span><i class="fa fa-add"></i></span></button>
+<button type="button" class="btn d-flex flex-row-reverse text-center" style="float:right ;background-color:#F9EBC8;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <span><i class="fa fa-add"></i></span></button>
 <!--for search on table-->
 <form class="d-flex">
   <input class="form-control me-2 text-end" ng-model="search" type="search" placeholder="جست و جو" aria-label="Search">
@@ -57,23 +57,27 @@
         <form class="row g-3 flex-row-reverse text-end">
           <div class="col-md-12">
             <label for="validationServer01" class="form-label">نام</label>
-            <input type="text" class="form-control is-valid text-end" id="validationServer01"  ng-model="firstName" required>
+            <input type="text" class="form-control is-valid text-end" id="validationServer01" required>
             <div class="valid-feedback">
              !مناسب
             </div>
           </div>
           <div class="col-md-12">
             <label for="validationServer02" class="form-label">نام خانوادگی</label>
-            <input type="text" class="form-control is-valid text-end" id="validationServer02" ng-model="lastName"  required>
+            <input type="text"  class="form-control is-valid text-end" id="validationServer02" ng-model="x.lastName"  required>
+        
             <div class="valid-feedback">
               !مناسب
             </div>
           </div>
           <div class="col-md-12">
+       
             <label for="validationServerUsername" class="form-label">ایمیل</label>
             <div class="input-group has-validation">
               <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-envelope"></i></span>
-               <input type="email" ng-model="email" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+            
+               <input type="email" ng-model="x.email" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+              
               <div id="validationServerUsernameFeedback" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="info@gmail.com" class="invalid-feedback">
               ایمیل خود را وارد کنید
               </div>
@@ -82,30 +86,37 @@
         
         
           <div class="col-md-6">
-            <select class="form-select text-end is-valid" aria-label="Default select example" ng-model="jens" required>
+       
+            <select class="form-select text-end is-valid" aria-label="Default select example" ng-model="x.jens" required>
               <option selected>جنسیت</option>
               <option value="1">خانم</option>
               <option value="2">آقا</option>
              
             </select>
+           
           </div>
           <div class="col-md-6">
             <div class="input-group mb-3">
               <span class="input-group-text">$</span>
-              <input type="number" class="form-control is-valid" ng-model="salary"  aria-label="Amount (to the nearest dollar)"  required>
+              <input type="number"  class="form-control is-valid" ng-model="x.salary"  aria-label="Amount (to the nearest dollar)"  required>
               <span class="input-group-text"></span>
             </div>
           </div>
           <div class="col-md-6">
+           
             <!-- <label for="validationServer01" class="form-label"></label> -->
-            <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="minTransaction" value="" placeholder="حداقل تراکنش:2" required>
+            
+            <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="x.minTransaction" value="" placeholder="حداقل تراکنش:2" required>
+        
             <div class="valid-feedback">
              
             </div>
           </div>
           <div class="col-md-6">
             <!-- <label for="validationServer01" class="form-label"></label> -->
-            <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="maxTransaction" value="" placeholder="حداکثر تراکنش:10" required>
+        
+               <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="x.maxTransaction" value="" placeholder="حداکثر تراکنش:10" required>
+            
             <div class="valid-feedback">
              
             </div>
@@ -116,11 +127,10 @@
           </div>
         </form> 
 <!--End form control-->
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن فرم</button>
-        <button type="button" class="btn btn-primary">به جدول اضافه کن</button>
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن فرم</button> -->
+        <!-- <button type="button" class="btn btn-primary">به جدول اضافه کن</button> -->
       </div>
     </div>
   </div>
@@ -128,16 +138,19 @@
 <!--End modal for add user-->
 
     </div>
-    <!--End main wraqpper-->
+  
 
-      <div class="container">
-        <!--table list-of-users-->
-<table class="table table-hover table-responsive">
-  <thead>
-    <tr class="bg-light">
-      <th scope="col">#</th>
+<div class="container">
+<!--table list-of-users-->
+<table class="table table-hover table-responsive" style="background-color:#DAE5D0;">
+  <thead style="background-color: #FEFBE7 !important;">
+    <tr>
+      
+      <th scope="col" ng-click="sort('Id')">#
+        <i class="fa-solid fa-sort" ng-show="sortKey=='Id'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
+
+      </th>
       <th ng-click="sort('firstName')" scope="col">نام
-      <!-- <span class="fa fa-sort" ng-show="sortKey=='firstName'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></span> -->
       <i class="fa-solid fa-sort" ng-show="sortKey=='firstName'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
     </th>
       <th ng-click="sort('lastName')" scope="col">نام خانوادگی
@@ -166,24 +179,67 @@
     
       <th scope="col"> ویرایش</th>
       <th scope="col">حذف</th>
-
+    
     </tr>
   </thead>
   <tbody>
     
     <tr dir-paginate="x in users | itemsPerPage:2 |filter: search | orderBy:sortKey:reverse" ng-model="addMe" dir-paginate="value in data | itemsPerPage: 5">
       <th scope="row">{{x.Id}}</th>
-      <td>{{x.firstName}}</td>
-      <td>{{x.lastName}}</td>
-      <td>{{x.email}}</td>
-      <td>{{x.jens}}</td>
-      <td>{{x.salary}}</td>
-      <td>{{x.minTransaction}}</td>
-      <td>{{x.maxTransaction}}</td>
-      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center"  ng-click="editUsers(firstName)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-edit"></i></span></button>
-      <td><button type="button" class="btn btn-primary d-flex flex-row-reverse text-center" ng-click="removeItem($index)" ng-click="delete()" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-trash"></i></span></button>
+      <td>
+        <div ng-hide="view">{{x.firstName}}</div> 
+        <div ng-show="modify">
+          <input type="text"  ng-model="x.firstName" class="form-control is-valid text-end" id="validationServer01" required>
+        
+        </div>
       </td>
+      <td>
+        <div ng-hide="view">{{x.lastName}}</div>
+        <div ng-show="modify">
+          <input type="text" class="form-control is-valid text-end" id="validationServer02" ng-model="x.lastName"  required>
+        </div>
       </td>
+      <td>
+        <div ng-hide="view">{{x.email}}</div>
+     <div ng-show="modify">
+      <input type="email" ng-model="x.email" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+     </div>
+      </td>
+      <td>
+        <div ng-hide="view">{{x.jens}}</div>
+        <div ng-show="modify">
+        <select class="form-select text-end is-valid" aria-label="Default select example" ng-model="x.jens" required>
+          <option selected>جنسیت</option>
+          <option value="1">خانم</option>
+          <option value="2">آقا</option>
+        </select>
+        </div>
+      </td>
+      <td>
+        <div ng-hide="view">{{x.salary}}</div>
+        <div ng-show="modify">
+          <input type="number" class="form-control is-valid" ng-model="x.salary"  aria-label="Amount (to the nearest dollar)"  required>
+        </div>
+       </td>
+      <td> 
+        <div ng-hide="view">  {{x.minTransaction}}</div>
+        <div ng-show="modify">
+          <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="x.minTransaction" value="" placeholder="حداقل تراکنش:2" required>
+
+          </div>
+      </td>
+      <td>
+        <div ng-hide="view">{{x.maxTransaction}}</div>
+        <div ng-show="modify">
+          <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="x.maxTransaction" value="" placeholder="حداکثر تراکنش:2" required>
+          </div>
+      </td>
+      <td><button type="button" class="btn d-flex flex-row-reverse text-center" style="background-color:#A0BCC2" ng-click="editUsers($index)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-edit"></i></span></button>
+        </td>
+      <td><button type="button" class="btn d-flex flex-row-reverse text-center" style="background-color:#A0BCC2" 
+        ng-click="removeItem(x)"  style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-trash"></i></span></button>
+      </td>
+      
     </tr>
   </tbody>
 </table>
