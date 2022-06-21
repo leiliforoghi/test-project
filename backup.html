@@ -1,0 +1,30 @@
+
+// var editView = angular.module("editView", ['']);
+// editView.controller("appcontroler", function ($scope,$http,$modal) {
+  var modalinstance = null;
+  
+  $scope.editUsers = function(x){
+  // if(Id > 0){
+    // $http.get("./index.html"+ Id)
+    // .then(function(response){
+        modalinstance = $modal.open({
+        animation: true,
+        templateUrl:"./edit.html",
+        controller: "appcontroler",
+        $scope:$scope,
+        size:'',
+        backdrop: true,
+        windowClass: 'modal',
+        resolve:{
+          record : function(){
+            return response.data;
+          }
+        }
+      });
+    
+    // });
+  // }
+  
+  // }
+}
+// });

@@ -6,248 +6,354 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>پروژه</title>
     <!--bootstrap css-->
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
     <!--main style-->
-    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="./style.css" />
     <!--font awesome cdn-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!--angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <!--angular-route -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-    
   </head>
   <body dir="ltr" ng-app="num" ng-controller="numberc">
-   
     <div class="container py-2">
+     
 
-     <!--nav-->
-      <!-- <ul class="nav nav-pills nav-fill d-flex flex-row-reverse">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">صفحه اصلی</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"> کاربران</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">تماس با ما</a>
-        </li>
-      </ul> -->
-    <!--End nav-->
+      <!--add user in modal-->
+      <button
+        type="button"
+        class="btn d-flex flex-row-reverse text-center btn-add"
+        style="float: right; background-color: #f9ebc8;"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal1"
+        data-bs-whatever="@mdo"
+      >
+        <span><i class="fa fa-add"></i></span>
+      </button>
+      <!--for search on table-->
+      <form class="d-flex">
+        <input
+          class="form-control me-2 text-end"
+          ng-model="search"
+          type="search"
+          placeholder="جست و جو"
+          aria-label="Search"
+        />
+      </form>
+      <!--end for search on table-->
 
-<!--add user in modal-->
-<button type="button" class="btn d-flex flex-row-reverse text-center" style="float:right ;background-color:#F9EBC8;" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@mdo"> <span><i class="fa fa-add"></i></span></button>
-<!--for search on table-->
-<form class="d-flex">
-  <input class="form-control me-2 text-end" ng-model="search" type="search" placeholder="جست و جو" aria-label="Search">
-</form>
-<!--end for search on table-->
+      <!--modal for add user-->
+      <div class="modal fade" id="exampleModal1" tabindex="-1" 
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-end">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">کاربر جدید</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!--form control-->
+              <form class="row g-3 flex-row-reverse text-end">
+                <div class="col-md-12">
+                  <label for="validationServer01" class="form-label">نام</label>
+                  <input
+                    type="text"
+                    class="form-control text-end"
+                    ng-model="firstName"
+                    id="validationServer01"
+                    required
+                  />
+                 
+                </div>
+                <div class="col-md-12">
+                  <label for="validationServer02" class="form-label"
+                    >نام خانوادگی</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control text-end"
+                    id="validationServer02"
+                    ng-model="lastName"
+                    required
+                  />
 
-<!--modal for add user-->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-end">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">کاربر جدید</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  
+                </div>
+                <div class="col-md-12">
+                  <label for="validationServerUsername" class="form-label"
+                    >ایمیل</label
+                  >
+                  <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend3"
+                      ><i class="fa fa-envelope"></i
+                    ></span>
+
+                    <input
+                      type="email"
+                      ng-model="email"
+                      class="form-control"
+                      pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                      id="validationServerUsername"
+                      aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
+                      required
+                    />
+
+                    <div
+                      id="validationServerUsernameFeedback"
+                  
+                      placeholder="info@gmail.com"
+                      class="invalid-feedback"
+                    >
+                      ایمیل خود را وارد کنید
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <select
+                    class="form-select text-end"
+                    aria-label="Default select example"
+                    ng-model="jens"
+                    required
+                  >
+                    <option selected>جنسیت</option>
+                    <option value="1">خانم</option>
+                    <option value="2">آقا</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <input
+                      type="number"
+                      class="form-control"
+                      ng-pattern="/[1-9][0-9]{0,2}(?:,?[0-9]{3}){0,3}(?:\.[0-9]{1,2})?$/g"
+                      ng-model="salary"
+                      aria-label="Amount (to the nearest dollar)"
+                      required
+                    />
+
+                    <span class="input-group-text"></span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- <label for="validationServer01" class="form-label"></label> -->
+
+                  <input
+                    type="number"
+                    class="form-control is-valid"
+                    id="validationServer01"
+                    ng-model="minTransaction"
+                    value=""
+                    placeholder="حداقل تراکنش:2"
+                    required
+                  />
+                  <div class="valid-feedback">!مقداری برابر یا کمتر از حداکثر وارد کنید</div>
+                </div>
+                <!-- ng-If="number(maxTransaction) == number(minTransaction)" -->
+                <div class="col-md-6 has-validation">
+                  <!-- <label for="validationServer01" class="form-label"></label> -->
+
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="validationServer01"
+                    ng-model="maxTransaction"
+                   
+                    value=""
+                    placeholder="حداکثر تراکنش:10"
+                    required
+                  />
+
+                  <div class="valid-feedback">
+                    
+                  </div>
+                </div>
+
+                <div class="col-12 text-center">
+                  <button
+                    class="btn btn-outline-primary w-100"
+                    type="submit"
+                    ng-click="addUsers(x)"
+                  >
+                    اضافه کن
+                  </button>
+                </div>
+              </form>
+              <!--End form control-->
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن فرم</button> -->
+              <!-- <button type="button" class="btn btn-primary">به جدول اضافه کن</button> -->
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-       
-<!--form control-->
-        <form class="row g-3 flex-row-reverse text-end">
-          <div class="col-md-12">
-            <label for="validationServer01" class="form-label">نام</label>
-            <input type="text" class="form-control is-valid text-end" ng-model="x.firstName" id="validationServer01" required>
-            <div class="valid-feedback">
-             !مناسب
-            </div>
-          </div>
-          <div class="col-md-12">
-            <label for="validationServer02" class="form-label">نام خانوادگی</label>
-            <input type="text"  class="form-control is-valid text-end" id="validationServer02" ng-model="x.lastName"  required>
-        
-            <div class="valid-feedback">
-              !مناسب
-            </div>
-          </div>
-          <div class="col-md-12">
-       
-            <label for="validationServerUsername" class="form-label">ایمیل</label>
-            <div class="input-group has-validation">
-              <span class="input-group-text" id="inputGroupPrepend3"><i class="fa fa-envelope"></i></span>
-            
-               <input type="email" ng-model="x.email" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
-              
-              <div id="validationServerUsernameFeedback" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="info@gmail.com" class="invalid-feedback">
-              ایمیل خود را وارد کنید
-              </div>
-            </div>
-          </div>
-        
-        
-          <div class="col-md-6">
-       
-            <select class="form-select text-end is-valid" aria-label="Default select example" ng-model="x.jens" required>
-              <option selected>جنسیت</option>
-              <option value="1">خانم</option>
-              <option value="2">آقا</option>
-             
-            </select>
-           
-          </div>
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <span class="input-group-text">$</span>
-              <input type="number"  class="form-control is-valid" ng-model="x.salary"  aria-label="Amount (to the nearest dollar)"  required>
-              <span class="input-group-text"></span>
-            </div>
-          </div>
-          <div class="col-md-6">
-           
-            <!-- <label for="validationServer01" class="form-label"></label> -->
-            
-            <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="x.minTransaction" value="" placeholder="حداقل تراکنش:2" required>
-        
-            <div class="valid-feedback">
-             
-            </div>
-          </div>
-          <div class="col-md-6">
-            <!-- <label for="validationServer01" class="form-label"></label> -->
-        
-               <input type="number" class="form-control is-valid" id="validationServer01"  ng-model="x.maxTransaction" value="" placeholder="حداکثر تراکنش:10" required>
-            
-            <div class="valid-feedback">
-             
-            </div>
-          </div>
-        
-          <div class="col-12 text-center">
-            <button class="btn btn-outline-primary w-100" type="submit" ng-click="addUsers()">اضافه کن</button>
-          </div>
-        </form> 
-<!--End form control-->
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن فرم</button> -->
-        <!-- <button type="button" class="btn btn-primary">به جدول اضافه کن</button> -->
-      </div>
+      <!--End modal for add user-->
     </div>
-  </div>
+
+    <div class="container">
+      <!--table list-of-users-->
+      <table
+        class="table table-hover table-responsive table-shadow"
+        style="background-color: #dae5d0"
+      >
+        <thead style="background-color: #fefbe7 !important">
+          <tr>
+            <th scope="col" ng-click="sort('Id')">
+              #
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='Id'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+            <th ng-click="sort('firstName')" scope="col">
+              نام
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='firstName'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+            <th ng-click="sort('lastName')" scope="col">
+              نام خانوادگی
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='lastName'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+
+            <th ng-click="sort('email')" scope="col">
+              ایمیل
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='email'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+
+            <th ng-click="sort('jens')" scope="col">
+              جنسیت
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='jens'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+
+            <th ng-click="sort('salary')" scope="col">
+              درآمد ماهانه
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='salary'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+            <th ng-click="sort('minTransaction')" scope="col">
+              حداقل تراکنش
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='minTransaction'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+
+            <th ng-click="sort('maxTransaction')" scope="col">
+              حداکثر تراکنش
+              <i
+                class="fa-solid fa-sort"
+                ng-show="sortKey=='maxTransaction'"
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
+              ></i>
+            </th>
+
+            <th scope="col">ویرایش</th>
+            <th scope="col">حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- dir-paginate="value in data | itemsPerPage: 5" -->
+          <tr
+            dir-paginate="x in users | itemsPerPage:3 |filter: search | orderBy:sortKey:reverse" 
+            ng-model="addMe">
+            <th scope="row">{{x.Id}}</th>
+
+            <td>{{x.firstName}}</td>
+            <td>{{x.lastName}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.jens}}</td>
+            <td>{{x.salary | number : fractionSize}}</td>
+            <td>{{x.minTransaction}}</td>
+            <td>{{x.maxTransaction}}</td>
+            <td>
+              <button
+                type="button"
+                data-bs-target="#exampleModal1"
+                data-bs-whatever="@mdo"
+                class="btn d-flex flex-row-reverse text-center"
+                style="background-color: #a0bcc2"
+                ng-click="editUsers(x)"
+                ng-model="edi"
+                style="float: right"
+                data-bs-toggle="modal"
+                data-target="#edit">
+                <span><i class="fa fa-edit"></i></span>
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn d-flex flex-row-reverse text-center"
+                style="background-color: #a0bcc2"
+                ng-click="removeItem(x.Id)"
+                style="float: right"
+                data-bs-toggle="modal"
+              >
+                <span><i class="fa fa-trash"></i></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--pagination-->
+      <dir-pagination-controls
+        class="paginate"
+        max-size="3"
+        direction-links="true"
+      >
+      </dir-pagination-controls>
+      <!--end pagination-->
+     
+      <!--End table list-of-users-->
+
+<div edit-view>
+  <edit-view ng-if="edi=true">
+
+  </edit-view>
 </div>
-<!--End modal for add user-->
+
+
+
+
 
     </div>
-  
-
-<div class="container">
-<!--table list-of-users-->
-<table class="table table-hover table-responsive" style="background-color:#DAE5D0;">
-  <thead style="background-color: #FEFBE7 !important;">
-    <tr>
-      
-      <th scope="col" ng-click="sort('Id')">#
-        <i class="fa-solid fa-sort" ng-show="sortKey=='Id'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-
-      </th>
-      <th ng-click="sort('firstName')" scope="col">نام
-      <i class="fa-solid fa-sort" ng-show="sortKey=='firstName'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-    </th>
-      <th ng-click="sort('lastName')" scope="col">نام خانوادگی
-        <i class="fa-solid fa-sort" ng-show="sortKey=='lastName'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-      </th>
-   
-      <th ng-click="sort('email')" scope="col">ایمیل
-        <i class="fa-solid fa-sort" ng-show="sortKey=='email'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-      </th>
-     
-      <th ng-click="sort('jens')" scope="col">جنسیت
-        <i class="fa-solid fa-sort" ng-show="sortKey=='jens'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-      </th>
-  
-      <th ng-click="sort('salary')"scope="col">درآمد ماهانه
-        <i class="fa-solid fa-sort" ng-show="sortKey=='salary'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-      </th>
-      <th ng-click="sort('minTransaction')" scope="col">حداقل تراکنش
-        <i class="fa-solid fa-sort" ng-show="sortKey=='minTransaction'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-      </th>
-     
-      <th ng-click="sort('maxTransaction')" scope="col">حداکثر تراکنش
-        <i class="fa-solid fa-sort" ng-show="sortKey=='maxTransaction'" ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
-
-      </th>
-    
-      <th scope="col"> ویرایش</th>
-      <th scope="col">حذف</th>
-    
-    </tr>
-  </thead>
-  <tbody>
-    
-    <tr dir-paginate="x in users | itemsPerPage:2 |filter: search | orderBy:sortKey:reverse" ng-model="addMe" dir-paginate="value in data | itemsPerPage: 5">
-      <th scope="row">{{x.Id}}</th>
-      <td>
-      {{x.firstName}}
-      </td>
-      <td>
-       {{x.lastName}}
-        
-      </td>
-      <td>
-      {{x.email}}
-     
-      </td>
-      <td>
-       {{x.jens}}
-      
-      </td>
-      <td>
-        {{x.salary}}
-        
-       </td>
-      <td> 
-         {{x.minTransaction}}
-        
-      </td>
-      <td>
-        {{x.maxTransaction}}
-        
-         
-      </td>
-      <td><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" id="modal2" data-bs-whatever="@mdo" class="btn d-flex flex-row-reverse text-center" style="background-color:#A0BCC2" ng-click="editUsers(x)" style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-edit"></i></span></button>
-        </td>
-      <td><button type="button" class="btn d-flex flex-row-reverse text-center" style="background-color:#A0BCC2" 
-        ng-click="removeItem(x)"  style="float:right ;" data-bs-toggle="modal"> <span><i class="fa fa-trash"></i></span></button>
-      </td>
-      
-    </tr>
-  </tbody>
-</table>
-<!--pagination-->
-<dir-pagination-controls class="paginate"
-max-size="2"
-direction-links="true"
-boundary-links="true">
-</dir-pagination-controls>
-<!--end pagination-->
-
-<!--End table list-of-users-->
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!--main-script-->
@@ -258,10 +364,12 @@ boundary-links="true">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script> -->
     <!--bootstrap-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
     <!--pagination-->
     <script src="./pagination.js"></script>
-
-
   </body>
 </html>
