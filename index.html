@@ -27,16 +27,16 @@
   </head>
   <body dir="ltr" ng-app="num" ng-controller="numberc">
     <div class="container py-2">
-     
-
       <!--add user in modal-->
       <button
         type="button"
         class="btn d-flex flex-row-reverse text-center btn-add"
-        style="float: right; background-color: #f9ebc8;"
+        style="float: right; background-color: #f9ebc8"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal1"
         data-bs-whatever="@mdo"
+        ng-click="addUser()"
+        ng-model="addUser"
       >
         <span><i class="fa fa-add"></i></span>
       </button>
@@ -53,12 +53,18 @@
       <!--end for search on table-->
 
       <!--modal for add user-->
-      <div class="modal fade" id="exampleModal1" tabindex="-1" 
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="exampleModal1"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content text-end">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">کاربر جدید</h5>
+            <div class="modal-header flex-row-reverse" ng-show="viewedit">
+              <h5 class="modal-title flex-grow-1" id="exampleModalLabel"> ویرایش کاربر</h5>
+
               <button
                 type="button"
                 class="btn-close"
@@ -66,6 +72,17 @@
                 aria-label="Close"
               ></button>
             </div>
+
+            <div class="modal-header flex-row-reverse" ng-hide="viewedit">
+              <h5 class="modal-title flex-grow-1" id="exampleModalLabe1"> کاربر جدید</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
             <div class="modal-body">
               <!--form control-->
               <form class="row g-3 flex-row-reverse text-end">
@@ -78,7 +95,6 @@
                     id="validationServer01"
                     required
                   />
-                 
                 </div>
                 <div class="col-md-12">
                   <label for="validationServer02" class="form-label"
@@ -91,8 +107,6 @@
                     ng-model="lastName"
                     required
                   />
-
-                  
                 </div>
                 <div class="col-md-12">
                   <label for="validationServerUsername" class="form-label"
@@ -115,7 +129,6 @@
 
                     <div
                       id="validationServerUsernameFeedback"
-                  
                       placeholder="info@gmail.com"
                       class="invalid-feedback"
                     >
@@ -156,14 +169,16 @@
 
                   <input
                     type="number"
-                    class="form-control is-valid"
+                    class="form-control"
                     id="validationServer01"
                     ng-model="minTransaction"
                     value=""
                     placeholder="حداقل تراکنش:2"
                     required
                   />
-                  <div class="valid-feedback">!مقداری برابر یا کمتر از حداکثر وارد کنید</div>
+                  <!-- <div class="valid-feedback">
+                    !مقداری برابر یا کمتر از حداکثر وارد کنید
+                  </div> -->
                 </div>
                 <!-- ng-If="number(maxTransaction) == number(minTransaction)" -->
                 <div class="col-md-6 has-validation">
@@ -174,18 +189,15 @@
                     class="form-control"
                     id="validationServer01"
                     ng-model="maxTransaction"
-                   
                     value=""
                     placeholder="حداکثر تراکنش:10"
                     required
                   />
 
-                  <div class="valid-feedback">
-                    
-                  </div>
+                  <div class="valid-feedback"></div>
                 </div>
 
-                <div class="col-12 text-center">
+                <div class="col-12 text-center" ng-hide="removeadd">
                   <button
                     class="btn btn-outline-primary w-100"
                     type="submit"
@@ -197,10 +209,22 @@
               </form>
               <!--End form control-->
             </div>
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن فرم</button> -->
-              <!-- <button type="button" class="btn btn-primary">به جدول اضافه کن</button> -->
+            <!--ng-show-->
+            <!-- <div ng-show="viewedit"> -->
+            <div class="modal-footer" ng-show="viewedit">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                انصراف
+              </button>
+              <button type="button" class="btn btn-primary" ng-click="save()">
+                بروز رسانی
+              </button>
+              <!-- </div> -->
             </div>
+            <!--ng-show-->
           </div>
         </div>
       </div>
@@ -291,8 +315,9 @@
         <tbody>
           <!-- dir-paginate="value in data | itemsPerPage: 5" -->
           <tr
-            dir-paginate="x in users | itemsPerPage:3 |filter: search | orderBy:sortKey:reverse" 
-            ng-model="addMe">
+            dir-paginate="x in users | itemsPerPage:3 |filter: search | orderBy:sortKey:reverse"
+            ng-model="addMe"
+          >
             <th scope="row">{{x.Id}}</th>
 
             <td>{{x.firstName}}</td>
@@ -310,10 +335,11 @@
                 class="btn d-flex flex-row-reverse text-center"
                 style="background-color: #a0bcc2"
                 ng-click="editUsers(x)"
-                ng-model="edi"
+                ng-model="viewedit"
                 style="float: right"
                 data-bs-toggle="modal"
-                data-target="#edit">
+                data-target="#edit"
+              >
                 <span><i class="fa fa-edit"></i></span>
               </button>
             </td>
@@ -340,21 +366,15 @@
       >
       </dir-pagination-controls>
       <!--end pagination-->
-     
+
       <!--End table list-of-users-->
 
-<div edit-view>
+      <!-- <div edit-view>
   <edit-view ng-if="edi=true">
 
   </edit-view>
-</div>
-
-
-
-
-
+</div> -->
     </div>
-
 
     <!--main-script-->
     <script src="./app.js"></script>
