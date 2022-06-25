@@ -85,7 +85,15 @@ app.controller("numberc", function ($scope) {
   $scope.addUser = function () {
     $scope.removeadd = false;
     $scope.viewedit = false;
-    $scope.user = null;
+    //for reset form
+    $scope.firstName = "";
+    $scope.lastName = "";
+    $scope.email = "";
+    $scope.jens = "";
+    $scope.salary = "";
+    $scope.minTransaction = "";
+    $scope.maxTransaction = "";
+
   };
   //end add user
 
@@ -119,7 +127,7 @@ app.controller("numberc", function ($scope) {
           x.minTransaction = $scope.minTransaction;
           x.maxTransaction = $scope.maxTransaction;
         }
-     
+    
     });
 
 
