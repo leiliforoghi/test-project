@@ -1,7 +1,5 @@
-// 'ngRoute' for in broket in below
-
-var num = angular.module("num", ["angularUtils.directives.dirPagination"]);
-num.controller("numberc", function ($scope) {
+var app = angular.module("app", ["angularUtils.directives.dirPagination","cur.$mask"]);
+app.controller("numberc", function ($scope) {
   $scope.currentUser;
   $scope.users = [
     {
@@ -75,40 +73,7 @@ num.controller("numberc", function ($scope) {
     $scope.minTransaction = "";
     $scope.maxTransaction = "";
   };
-
-  // $scope.ok = function () {
-  //   modalInstance.close($scope.selected.item);
-  // };
-
-  // $scope.cancel = function () {
-  //   modalInstance.dismiss('cancel');
-  // };
-
-  // $scope.showDialog = function() {
-  //   console.log('hi')
-  //   var modalInstance = $modal.open({
-  //     templateUrl: 'style.css',
-  //     controller: 'DialogController',
-  //     resolve: {
-  //       model: function() {
-  //         return $scope.myData;
-  //       }
-  //     }
-  //   });
-  // }
-  // $scope('#exampleModal1').modal('hide');
-  //end add row in table
-
-  // $scope.editUsers=function(){
-  //   var index = getSelectedIndex = ($scope.Id);
-  //   $scope.users[index]= $scope.firstName;
-  //   $scope.users[index]= $scope.lastName;
-  //   $scope.users[index]= $scope.email;
-  //   $scope.users[index]= $scope.jens;
-  //   $scope.users[index]= $scope.salary;
-  //   $scope.users[index]= $scope.minTransaction;
-  //   $scope.users[index]= $scope.maxTransaction;
-  // };
+    //end add row in table
 
   //sort columns
   $scope.sort = function (keyname) {
@@ -129,7 +94,6 @@ num.controller("numberc", function ($scope) {
     $scope.removeadd = true;
     $scope.viewedit = true;
     var findUser = $scope.users.find((x) => x.Id == user.Id);
-    // for(var i=0;i<this.users.length;i++){
     $scope.Id = angular.copy(findUser.Id);
     $scope.firstName = angular.copy(findUser.firstName);
     $scope.lastName = angular.copy(findUser.lastName);
@@ -138,15 +102,13 @@ num.controller("numberc", function ($scope) {
     $scope.salary = angular.copy(findUser.salary);
     $scope.minTransaction = angular.copy(findUser.minTransaction);
     $scope.maxTransaction = angular.copy(findUser.maxTransaction);
-    
-    // };
   };
 
   //update row table
   $scope.save = function (user) {
     var users = $scope.users;
     users.map(function (x) {
-      // for (i in $scope.users) {
+    
         if (x.Id == $scope.Id) {
           x.Id = $scope.Id;
           x.firstName = $scope.firstName;
@@ -157,26 +119,12 @@ num.controller("numberc", function ($scope) {
           x.minTransaction = $scope.minTransaction;
           x.maxTransaction = $scope.maxTransaction;
         }
-      // }
+     
     });
 
+
   };
-  // });
-  //update row table
-
-  // $scope.selectEdit = function(Id){
-  //     var index = ($scope.Id);
-  //     var users = $scope.users[index];
-  //     $scope.Id = users.Id;
-  //     $scope.firstName = users.firstName;
-  //     $scope.lastName = users.lastName;
-  //     $scope.email = users.email;
-  //     $scope.jens = users.jens;
-  //     $scope.salary = users.salary;
-  //     $scope.minTransaction = users.minTransaction;
-  //     $scope.maxTransaction = users.maxTransaction;
-  // };
-
+  
   //end edit row table
 
   //remove row of table
@@ -189,49 +137,4 @@ num.controller("numberc", function ($scope) {
   };
   //end remove row of table
 
-  //pass form data to modal
-
-  //end pass form data to modal
 });
-// $scope.edi = function(){
-//   $scope.viewedit=true;
-//   $scope.removeadd = false;
-// }
-
-num.directive("edit-view", function () {
-  return {
-    templateUrl: "edit.html",
-    $scope: $scope,
-    replace: true,
-  };
-});
-
-// var editView = angular.module("editView", ['']);
-// num.controller("appcontroler", function ($scope,$http,$modal) {
-// var modalinstance = null;
-
-// $scope.editUsers = function(x){
-// if(Id > 0){
-// $http.get("./index.html"+ Id)
-// .then(function(response){
-//   modalinstance = $modal.open({
-//   animation: true,
-//   templateUrl:"./edit.html",
-//   controller: "appcontroler",
-//   $scope:$scope,
-//   size:'',
-//   backdrop: true,
-//   windowClass: 'modal',
-//   resolve:{
-//     record : function(){
-//       return response.data;
-//     }
-//   }
-// });
-
-// });
-// }
-
-// }
-// }
-// });

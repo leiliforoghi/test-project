@@ -4,28 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>پروژه</title>
+    <title> پروژه اول</title>
     <!--bootstrap css-->
-    <link
-      rel="stylesheet"
-      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"/>
     <!--main style-->
     <link rel="stylesheet" href="./style.css" />
     <!--font awesome cdn-->
-    <link
-      rel="stylesheet"
+    <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
       integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+      referrerpolicy="no-referrer"/>
     <!--angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <!--angular-route -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
   </head>
-  <body dir="ltr" ng-app="num" ng-controller="numberc">
+  <body ng-app="app" ng-controller="numberc">
     <div class="container py-2">
       <!--add user in modal-->
       <button
@@ -36,8 +31,7 @@
         data-bs-target="#exampleModal1"
         data-bs-whatever="@mdo"
         ng-click="addUser()"
-        ng-model="addUser"
-      >
+        ng-model="addUser">
         <span><i class="fa fa-add"></i></span>
       </button>
       <!--for search on table-->
@@ -47,8 +41,7 @@
           ng-model="search"
           type="search"
           placeholder="جست و جو"
-          aria-label="Search"
-        />
+          aria-label="Search"/>
       </form>
       <!--end for search on table-->
 
@@ -58,8 +51,7 @@
         id="exampleModal1"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content text-end">
             <div class="modal-header flex-row-reverse" ng-show="viewedit">
@@ -69,8 +61,7 @@
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+                aria-label="Close"></button>
             </div>
 
             <div class="modal-header flex-row-reverse" ng-hide="viewedit">
@@ -79,8 +70,7 @@
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+                aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
@@ -93,29 +83,24 @@
                     class="form-control text-end"
                     ng-model="firstName"
                     id="validationServer01"
-                    required
-                  />
+                    required />
                 </div>
                 <div class="col-md-12">
                   <label for="validationServer02" class="form-label"
-                    >نام خانوادگی</label
-                  >
+                    >نام خانوادگی</label>
                   <input
                     type="text"
                     class="form-control text-end"
                     id="validationServer02"
                     ng-model="lastName"
-                    required
-                  />
+                    required/>
                 </div>
                 <div class="col-md-12">
                   <label for="validationServerUsername" class="form-label"
-                    >ایمیل</label
-                  >
+                    >ایمیل</label>
                   <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend3"
-                      ><i class="fa fa-envelope"></i
-                    ></span>
+                      ><i class="fa fa-envelope"></i></span>
 
                     <input
                       type="email"
@@ -124,14 +109,12 @@
                       pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                       id="validationServerUsername"
                       aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback"
-                      required
-                    />
+                      required/>
 
                     <div
                       id="validationServerUsernameFeedback"
                       placeholder="info@gmail.com"
-                      class="invalid-feedback"
-                    >
+                      class="invalid-feedback">
                       ایمیل خود را وارد کنید
                     </div>
                   </div>
@@ -142,25 +125,23 @@
                     class="form-select text-end"
                     aria-label="Default select example"
                     ng-model="jens"
-                    required
-                  >
+                    required >
                     <option selected>جنسیت</option>
-                    <option value="1">خانم</option>
-                    <option value="2">آقا</option>
+                    <option value="خانم">خانم</option>
+                    <option value="آقا">آقا</option>
                   </select>
                 </div>
                 <div class="col-md-6">
                   <div class="input-group mb-3">
-                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">Rial</span>
                     <input
-                      type="number"
+                      type="text"
                       class="form-control"
-                      ng-pattern="/[1-9][0-9]{0,2}(?:,?[0-9]{3}){0,3}(?:\.[0-9]{1,2})?$/g"
                       ng-model="salary"
                       aria-label="Amount (to the nearest dollar)"
-                      required
-                    />
-
+                      mask-currency
+                      required/>
+                      <!-- config="{group:'.',decimal:',',indentation:' '}" -->
                     <span class="input-group-text"></span>
                   </div>
                 </div>
@@ -174,16 +155,10 @@
                     ng-model="minTransaction"
                     value=""
                     placeholder="حداقل تراکنش:2"
-                    required
-                  />
-                  <!-- <div class="valid-feedback">
-                    !مقداری برابر یا کمتر از حداکثر وارد کنید
-                  </div> -->
+                    required />
                 </div>
-                <!-- ng-If="number(maxTransaction) == number(minTransaction)" -->
                 <div class="col-md-6 has-validation">
                   <!-- <label for="validationServer01" class="form-label"></label> -->
-
                   <input
                     type="number"
                     class="form-control"
@@ -191,8 +166,7 @@
                     ng-model="maxTransaction"
                     value=""
                     placeholder="حداکثر تراکنش:10"
-                    required
-                  />
+                    required />
 
                   <div class="valid-feedback"></div>
                 </div>
@@ -201,8 +175,7 @@
                   <button
                     class="btn btn-outline-primary w-100"
                     type="submit"
-                    ng-click="addUsers(x)"
-                  >
+                    ng-click="addUsers(x)">
                     اضافه کن
                   </button>
                 </div>
@@ -215,8 +188,7 @@
               <button
                 type="button"
                 class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
+                data-bs-dismiss="modal">
                 انصراف
               </button>
               <button type="button" class="btn btn-primary" ng-click="save()">
@@ -235,8 +207,7 @@
       <!--table list-of-users-->
       <table
         class="table table-hover table-responsive table-shadow"
-        style="background-color: #dae5d0"
-      >
+        style="background-color: #dae5d0">
         <thead style="background-color: #fefbe7 !important">
           <tr>
             <th scope="col" ng-click="sort('Id')">
@@ -244,24 +215,21 @@
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='Id'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
             <th ng-click="sort('firstName')" scope="col">
               نام
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='firstName'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
             <th ng-click="sort('lastName')" scope="col">
               نام خانوادگی
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='lastName'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
 
             <th ng-click="sort('email')" scope="col">
@@ -269,8 +237,7 @@
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='email'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
 
             <th ng-click="sort('jens')" scope="col">
@@ -278,8 +245,7 @@
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='jens'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
 
             <th ng-click="sort('salary')" scope="col">
@@ -287,16 +253,14 @@
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='salary'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
             <th ng-click="sort('minTransaction')" scope="col">
               حداقل تراکنش
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='minTransaction'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
 
             <th ng-click="sort('maxTransaction')" scope="col">
@@ -304,8 +268,7 @@
               <i
                 class="fa-solid fa-sort"
                 ng-show="sortKey=='maxTransaction'"
-                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"
-              ></i>
+                ng-class="{ 'fa-chevron-up': reverse , 'fa-chevron-down' : !reverse }"></i>
             </th>
 
             <th scope="col">ویرایش</th>
@@ -319,7 +282,6 @@
             ng-model="addMe"
           >
             <th scope="row">{{x.Id}}</th>
-
             <td>{{x.firstName}}</td>
             <td>{{x.lastName}}</td>
             <td>{{x.email}}</td>
@@ -338,8 +300,7 @@
                 ng-model="viewedit"
                 style="float: right"
                 data-bs-toggle="modal"
-                data-target="#edit"
-              >
+                data-target="#edit">
                 <span><i class="fa fa-edit"></i></span>
               </button>
             </td>
@@ -350,8 +311,7 @@
                 style="background-color: #a0bcc2"
                 ng-click="removeItem(x.Id)"
                 style="float: right"
-                data-bs-toggle="modal"
-              >
+                data-bs-toggle="modal">
                 <span><i class="fa fa-trash"></i></span>
               </button>
             </td>
@@ -362,26 +322,15 @@
       <dir-pagination-controls
         class="paginate"
         max-size="3"
-        direction-links="true"
-      >
+        direction-links="true">
       </dir-pagination-controls>
       <!--end pagination-->
 
       <!--End table list-of-users-->
-
-      <!-- <div edit-view>
-  <edit-view ng-if="edi=true">
-
-  </edit-view>
-</div> -->
     </div>
 
     <!--main-script-->
     <script src="./app.js"></script>
-    <!--angular-->
-    <!-- <script src="./node_modules/angular/angular.min.js"></script> -->
-    <!--angular-route -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script> -->
     <!--bootstrap-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script
@@ -389,7 +338,9 @@
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
       crossorigin="anonymous"
     ></script>
-    <!--pagination-->
+    <!--pagination js-->
     <script src="./pagination.js"></script>
+    <!--currency mask input-->
+    <script src="./currencyinput.js"></script>
   </body>
 </html>
