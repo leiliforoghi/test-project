@@ -47,7 +47,10 @@ body{
  .paginate li:hover a{
     color: black !important;
  }
-
+.ng-scope .active{
+    background-color: #DAE5D0 !important;
+    border-color: #DAE5D0 !important ;
+}
  :placeholder-shown{
      opacity: 0.5;
  }

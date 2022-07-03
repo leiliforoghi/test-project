@@ -20,7 +20,7 @@
     <!--angular-route -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
   </head>
-  <body ng-app="app" ng-controller="numberc">
+  <body dir="rtl" ng-app="app" ng-controller="numberc">
     <div class="container py-2">
       <!--add user in modal-->
       <button
@@ -156,6 +156,9 @@
                     value=""
                     placeholder="حداقل تراکنش:2"
                     required />
+                    <div class="valid-tooltip">
+                     مقداری کمتر یا برابر بیشترین وارد کنید!
+                    </div>
                 </div>
                 <div class="col-md-6 has-validation">
                   <!-- <label for="validationServer01" class="form-label"></label> -->
