@@ -1,4 +1,4 @@
-var app = angular.module("app", ["angularUtils.directives.dirPagination","cur.$mask"]);
+var app = angular.module("app", ["angularUtils.directives.dirPagination"]);
 app.controller("numberc", function ($scope) {
   $scope.currentUser;
   $scope.users = [
@@ -8,7 +8,7 @@ app.controller("numberc", function ($scope) {
       lastName: "نیازی",
       email: "ali_1@gmail.com",
       jens: "آقا",
-      salary: 563225000,
+      salary: '563.225.200' ,
       minTransaction: 10,
       maxTransaction: 12,
     },
@@ -18,7 +18,7 @@ app.controller("numberc", function ($scope) {
       lastName: "اصحابی",
       email: "nima.gh@gmail.com",
       jens: "آقا",
-      salary: 452100,
+      salary: '452.100',
       minTransaction: 5,
       maxTransaction: 16,
     },
@@ -28,7 +28,7 @@ app.controller("numberc", function ($scope) {
       lastName: "راد",
       email: "mina325@gmail.com",
       jens: "خانم",
-      salary: 532000,
+      salary: '532.000',
       minTransaction: 25,
       maxTransaction: 200,
     },
@@ -38,15 +38,16 @@ app.controller("numberc", function ($scope) {
       lastName: "فروغی",
       email: "leliforoghi@gmail.com",
       jens: "خانم",
-      salary: 25698,
+      salary: '256.958',
       minTransaction: 100,
       maxTransaction: 120,
     },
   ];
 
+
   //add row in table
   $scope.addUsers = function () {
-    var user = {
+    var user =  {
       Id: $scope.users.length + 1,
       firstName: $scope.firstName,
       lastName: $scope.lastName,
@@ -56,14 +57,27 @@ app.controller("numberc", function ($scope) {
       minTransaction: $scope.minTransaction,
       maxTransaction: $scope.maxTransaction,
     };
-
+   
     //for max conditions
-    if (user.maxTransaction >= user.minTransaction) {
+    if (user.maxTransaction >= user.minTransaction)
+    {
       console.log("i");
       $scope.users.push(user);
-    } else {
+
+    //for show and hide alert msg
+    setTimeout (function() {
+      $('#alert-success').fadeIn(500);
+      setTimeout(function() { 
+          $('#alert-success').fadeOut(1000); 
+      }, 2000);
+   })
+    //end for show and hide alert msg
+    }
+    else 
+    {
       console.log("error");
     }
+  
     //for reset form input
     $scope.firstName = "";
     $scope.lastName = "";
@@ -81,8 +95,10 @@ app.controller("numberc", function ($scope) {
     $scope.reverse = !$scope.reverse;
   };
   //end sort columns
+
   //add user
   $scope.addUser = function () {
+   
     $scope.removeadd = false;
     $scope.viewedit = false;
     //for reset form
@@ -129,8 +145,6 @@ app.controller("numberc", function ($scope) {
         }
     
     });
-
-
   };
   
   //end edit row table
@@ -145,4 +159,12 @@ app.controller("numberc", function ($scope) {
   };
   //end remove row of table
 
+//for seperate 3 digit input 
+  $(document).ready(function () {
+    $('input[name="salary"]').mask('000.000.000.000.000');
+  })
+
 });
+
+
+

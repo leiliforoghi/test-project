@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="ng-scope">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> پروژه اول</title>
+    <title> جدول کاربران </title>
     <!--bootstrap css-->
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"/>
     <!--main style-->
     <link rel="stylesheet" href="./style.css" />
-    <!--font awesome cdn-->
+    <!--font awesome CDN-->
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
       integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"/>
-    <!--angular -->
+    <!--angular js -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <!--angular-route -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+  
   </head>
   <body dir="rtl" ng-app="app" ng-controller="numberc">
     <div class="container py-2">
@@ -75,21 +76,29 @@
 
             <div class="modal-body">
               <!--form control-->
-              <form class="row g-3 flex-row-reverse text-end">
+              <form class="row g-3 flex-row-reverse text-end" name="frm" id="tr">
                 <div class="col-md-12">
-                  <label for="validationServer01" class="form-label">نام</label>
+                  <label class="form-label">نام
+                    <span ng-show="frm.firstName.$invalid" class="invalid">*</span>
+                    <span ng-show="frm.firstName.$valid"><i class="fa fa-check" style="color: green;"></i></span>
+                  </label>
                   <input
                     type="text"
+                    name="firstName"
                     class="form-control text-end"
                     ng-model="firstName"
-                    id="validationServer01"
                     required />
+                
                 </div>
                 <div class="col-md-12">
                   <label for="validationServer02" class="form-label"
-                    >نام خانوادگی</label>
+                    >نام خانوادگی
+                    <span ng-show="frm.lastName.$invalid" class="invalid">*</span>
+                    <span ng-show="frm.lastName.$valid"><i class="fa fa-check" style="color: green;"></i></span>
+                  </label>
                   <input
                     type="text"
+                    name="lastName"
                     class="form-control text-end"
                     id="validationServer02"
                     ng-model="lastName"
@@ -97,13 +106,17 @@
                 </div>
                 <div class="col-md-12">
                   <label for="validationServerUsername" class="form-label"
-                    >ایمیل</label>
+                    >ایمیل
+                    <span ng-show="frm.email.$invalid" class="invalid">*</span>
+                    <span ng-show="frm.email.$valid"><i class="fa fa-check" style="color: green;"></i></span>
+                  </label>
                   <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend3"
                       ><i class="fa fa-envelope"></i></span>
 
                     <input
                       type="email"
+                      name="email"
                       ng-model="email"
                       class="form-control"
                       pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
@@ -125,6 +138,7 @@
                     class="form-select text-end"
                     aria-label="Default select example"
                     ng-model="jens"
+                    name="jens"
                     required >
                     <option selected>جنسیت</option>
                     <option value="خانم">خانم</option>
@@ -135,69 +149,76 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rial</span>
                     <input
+                      id="mask"
                       type="text"
+                      name="salary"
                       class="form-control"
                       ng-model="salary"
                       aria-label="Amount (to the nearest dollar)"
-                      mask-currency
                       required/>
-                      <!-- config="{group:'.',decimal:',',indentation:' '}" -->
-                    <span class="input-group-text"></span>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <!-- <label for="validationServer01" class="form-label"></label> -->
-
+                  <span ng-show="frm.min.$invalid" class="invalid">*</span>
+                  <span ng-show="frm.min.$valid"><i class="fa fa-check" style="color: green;"></i></span>
+                 
                   <input
                     type="number"
+                    name="min"
                     class="form-control"
-                    id="validationServer01"
                     ng-model="minTransaction"
+                    ng-minlength="1" ng-maxlength="5"
                     value=""
                     placeholder="حداقل تراکنش:2"
                     required />
-                    <div class="valid-tooltip">
-                     مقداری کمتر یا برابر بیشترین وارد کنید!
-                    </div>
+                    <span ng-show="frm.min.$dirty&&frm.min.$error.maxlength" style="font-size:12px;color:rgb(136, 12, 12)">کمتر از 5 کاراکتر وارد کنید</span>
                 </div>
                 <div class="col-md-6 has-validation">
-                  <!-- <label for="validationServer01" class="form-label"></label> -->
+                  <span ng-show="frm.max.$invalid" class="invalid">*</span>
+                  <span ng-show="frm.max.$valid"><i class="fa fa-check" style="color: green;"></i></span>
                   <input
                     type="number"
                     class="form-control"
                     id="validationServer01"
                     ng-model="maxTransaction"
                     value=""
+                    name="max"
                     placeholder="حداکثر تراکنش:10"
                     required />
+                    <!-- <span ng-show="frm.max.$invalid" style="font-size:12px;color:rgb(136, 12, 12)" id="maxexp">!مقداری بیشتر یا برابر حداقل وارد کنید</span> -->
 
-                  <div class="valid-feedback"></div>
                 </div>
 
                 <div class="col-12 text-center" ng-hide="removeadd">
                   <button
-                    class="btn btn-outline-primary w-100"
+                    class="btn btn-outline-success w-100"
                     type="submit"
+                    ng-disabled="frm.$invalid"
                     ng-click="addUsers(x)">
-                    اضافه کن
+                 ثبت
                   </button>
                 </div>
               </form>
               <!--End form control-->
+
+              <!--for success alert add user in modal form-->
+              <div class="alert alert-success" id="alert-success" role="alert" style="display: none">
+               ! با موفقیت ثبت گردید 
+              </div>
+              <!--end for success alert add user in modal form-->
+
             </div>
             <!--ng-show-->
-            <!-- <div ng-show="viewedit"> -->
             <div class="modal-footer" ng-show="viewedit">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-outline-danger"
                 data-bs-dismiss="modal">
                 انصراف
               </button>
-              <button type="button" class="btn btn-primary" ng-click="save()">
+              <button type="button" class="btn btn-outline-success" ng-click="save()">
                 بروز رسانی
               </button>
-              <!-- </div> -->
             </div>
             <!--ng-show-->
           </div>
@@ -289,7 +310,8 @@
             <td>{{x.lastName}}</td>
             <td>{{x.email}}</td>
             <td>{{x.jens}}</td>
-            <td>{{x.salary | number : fractionSize}}</td>
+            <td>{{x.salary}}</td>
+            <!-- | number : fractionSize -->
             <td>{{x.minTransaction}}</td>
             <td>{{x.maxTransaction}}</td>
             <td>
@@ -331,11 +353,19 @@
 
       <!--End table list-of-users-->
     </div>
-
     <!--main-script-->
     <script src="./app.js"></script>
     <!--bootstrap-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--for input mask-->
+    <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"
+                integrity=
+    "sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA="
+                crossorigin="anonymous">
+        </script>    
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -343,7 +373,6 @@
     ></script>
     <!--pagination js-->
     <script src="./pagination.js"></script>
-    <!--currency mask input-->
-    <script src="./currencyinput.js"></script>
+ 
   </body>
 </html>
